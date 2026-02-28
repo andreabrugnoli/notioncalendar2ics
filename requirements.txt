@@ -1,0 +1,4 @@
+notion-client>=2.2.1
+icalendar>=5.0.12
+python-dotenv>=1.0.0
+Flask>=3.0.0
