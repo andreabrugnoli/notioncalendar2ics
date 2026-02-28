@@ -27,11 +27,15 @@ def get_all_pages(client: Client, database_id: str) -> list[dict]:
     cursor = None
 
     while True:
-        kwargs: dict = {"database_id": database_id, "page_size": 100}
+        body: dict = {"page_size": 100}
         if cursor:
-            kwargs["start_cursor"] = cursor
+            body["start_cursor"] = cursor
 
-        response = client.databases.query(**kwargs)
+        response = client.request(
+            path=f"databases/{database_id}/query",
+            method="POST",
+            body=body,
+        )
         pages.extend(response.get("results", []))
 
         if response.get("has_more"):
@@ -154,7 +158,7 @@ def generate_ics() -> bytes:
     if not NOTION_DATABASE_ID:
         raise ValueError("NOTION_DATABASE_ID is not set.")
 
-    client = Client(auth=NOTION_API_KEY)
+    client = Client(auth=NOTION_API_KEY, notion_version="2022-06-28")
 
     print(f"Fetching pages from database {NOTION_DATABASE_ID} …")
     pages = get_all_pages(client, NOTION_DATABASE_ID)
