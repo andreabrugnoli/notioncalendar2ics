@@ -97,12 +97,13 @@ Google syncs every ~24h.
   dynamically by type instead of hardcoding the name `"Name"` (actual name is `"Task"`)
 
 ## Deployment Status (updated 2026-03-01)
-- Service `notioncalendar2ics` on Render Free plan: **live**
-- Last deploy: commit `0a0a34c` — fix title property lookup
+- Service `notioncalendar2ics` on Render Free plan: **suspended** (manually, 2026-03-01)
+- Last deploy: commit `d1dcfa2` — docs update
 - All env vars confirmed correct on Render: `NOTION_API_KEY`, `NOTION_DATABASE_ID`, `DATE_PROPERTY=Data`
-- Free plan spins down after 15 min inactivity (~60s cold start); Google Calendar subscription active
+- Google Calendar subscription removed
+- To reactivate: resume the service via Render dashboard or API (`POST /v1/services/{id}/resume`)
 
 ## Next Steps
-- [ ] Set up a cron-job.org ping every 10 min to keep Render free instance alive
+- [ ] When reactivating: set up a cron-job.org ping every 10 min to keep Render free instance alive
 - [ ] Consider upgrading to Render Starter ($7/mo) for always-on availability
 - [ ] Add filtering to only export tasks with a date (currently logs skipped pages)
