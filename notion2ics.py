@@ -84,8 +84,12 @@ def page_to_event(page: dict) -> Event | None:
     properties = page.get("properties", {})
 
     # --- Title ---
-    title_prop = properties.get("Name") or properties.get("title") or {}
-    title_items = title_prop.get("title", [])
+    # Find the title property dynamically by type (works regardless of property name)
+    title_items = []
+    for prop_value in properties.values():
+        if isinstance(prop_value, dict) and "title" in prop_value:
+            title_items = prop_value.get("title", [])
+            break
     title = "".join(t.get("plain_text", "") for t in title_items).strip() or "Untitled"
 
     # --- Date ---
