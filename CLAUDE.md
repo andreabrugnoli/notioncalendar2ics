@@ -42,6 +42,8 @@ notioncalendar2ics/
   2.7.0 removed `.query()` from `DatabasesEndpoint`
 - Notion API version pinned to `2022-06-28` via `Client(notion_version="2022-06-28")`
   to keep the `databases/{id}/query` endpoint working
+- Title property found dynamically by type (not by name) → works regardless of what
+  the title column is called in Notion (`Task`, `Name`, etc.)
 
 ## Running locally
 ```bash
@@ -91,6 +93,14 @@ Google syncs every ~24h.
   → forced `notion_version="2022-06-28"` in Client init
 - On macOS with Homebrew Python, must use a venv (`python3 -m venv .venv`)
 - `DATE_PROPERTY` must match the exact Italian name `Data`, not `Date`
+- Title was showing as "Untitled" in Google Calendar → fixed by finding the title property
+  dynamically by type instead of hardcoding the name `"Name"` (actual name is `"Task"`)
+
+## Deployment Status (updated 2026-03-01)
+- Service `notioncalendar2ics` on Render Free plan: **live**
+- Last deploy: commit `0a0a34c` — fix title property lookup
+- All env vars confirmed correct on Render: `NOTION_API_KEY`, `NOTION_DATABASE_ID`, `DATE_PROPERTY=Data`
+- Free plan spins down after 15 min inactivity (~60s cold start); Google Calendar subscription active
 
 ## Next Steps
 - [ ] Set up a cron-job.org ping every 10 min to keep Render free instance alive
