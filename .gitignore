@@ -1,8 +1,11 @@
 # Environment
 .env
+.env.local
 
 # Generated output
 calendar.ics
+output/
+outputs/
 
 # Python
 __pycache__/
@@ -19,9 +22,31 @@ venv/
 .venv/
 env/
 
+# Claude Code (locale — non versionare)
+.claude/sessions/
+.claude/history.jsonl
+.claude/cache/
+.claude/debug/
+.claude/backups/
+.claude/telemetry/
+.claude/statsig/
+.claude/stats-cache.json
+.claude/mcp-needs-*-cache.json
+.claude/shell-snapshots/
+.claude/session-env/
+
 # IDE
 .idea/
-.vscode/
+.vscode/settings.json
 *.swp
 *.swo
+
+# macOS
 .DS_Store
+.AppleDouble
+
+# Testing
+.pytest_cache/
+.coverage
+.ruff_cache/
+.mypy_cache/
