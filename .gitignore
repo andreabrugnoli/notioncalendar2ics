@@ -23,6 +23,7 @@ venv/
 env/
 
 # Claude Code (locale — non versionare)
+.claude/
 .claude/sessions/
 .claude/history.jsonl
 .claude/cache/
@@ -46,6 +47,7 @@ env/
 .AppleDouble
 
 # Testing
+test_write
 .pytest_cache/
 .coverage
 .ruff_cache/
